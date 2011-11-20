@@ -1,0 +1,14 @@
+<aiml>
+  <category>
+    <pattern>WAKE</pattern>
+    <template>
+      <!-- only allow this operation if the "secure" predicate is set to yes. -->
+      <condition name="secure">
+	<li value="yes">
+	  <learn>ai.aiml</learn>
+	</li>
+	<li>You are not permitted to load AIML sets.</li>
+      </condition>
+    </template>
+  </category>
+</aiml>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<aiml>
+<!--  -->
+<!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+<!-- This program is open source code released under -->
+<!-- the terms of the GNU General Public License     -->
+<!-- as published by the Free Software Foundation.   -->
+<!-- Complies with AIML 1.0 Tag Set Specification -->
+<!-- as adopted by the ALICE A.I. Foundation.  -->
+<!--  --> 
+<category><pattern>WHERE IS TRINITY</pattern><template>Trinity is in Easton, Bristol</template></category> 
+
+<category><pattern>WHERE IS THE TRINITY *</pattern><template><system>trinity.curate.bot.macros.TrinityStuff</system></template></category> 
+<category><pattern>WHERE ARE THE TRINITY *</pattern><template><srai>where is the trinity <star /></srai></template></category> 
+<category><pattern>WHERE THE TRINITY * IS</pattern><template><srai>where is the trinity <star /></srai></template></category> 
+<category><pattern>WHERE THE TRINITY * ARE</pattern><template><srai>where is the trinity <star /></srai></template></category> 
+
+<!-- membership -->
+<category><pattern>WHO ARE MEMBERS</pattern><template><system>trinity.curate.bot.macros.TrinityMembers</system></template></category> 
+<category><pattern>WHO ARE TRINITY MEMBERS</pattern><template><srai>WHO ARE MEMBERS</srai></template></category> 
+<category><pattern>WHO ARE THE TRINITY MEMBERS</pattern><template><srai>WHO ARE MEMBERS</srai></template></category> 
+
+<!-- group membership -->
+<category><pattern>WHAT GROUPS AM I IN</pattern><template><system>trinity.curate.bot.macros.TrinityMemberGroups</system></template></category>
+<category><pattern>WHAT GROUPS IS * IN</pattern><template><system>trinity.curate.bot.macros.TrinityMemberGroups</system></template></category>  
+
+<category><pattern>WHAT ROLES DOES * HAVE</pattern><template><system>trinity.curate.bot.macros.TrinityMemberRoles</system></template></category>  
+
+<category><pattern>DOES * HAVE AN EMAIL ACCOUNT</pattern><template><system>trinity.curate.bot.macros.TrinityEmailAccount</system></template></category>
+
+<!-- member info -->
+<category><pattern>WHO IS *</pattern><template><system>trinity.curate.bot.macros.TrinityMemberName</system></template></category>  
+<category><pattern>DO YOU KNOW *</pattern><template><srai>who is <star index="1" /></srai></template></category> 
+<category><pattern>WHO * IS</pattern><template><srai>who is <star index="1" /></srai></template></category> 
+<category><pattern>WHO * AM</pattern><template><srai>who is <star index="1" /></srai></template></category> 
+
+
+<category><pattern>WHAT IS * UID</pattern><template><system>trinity.curate.bot.macros.TrinityMemberUID</system></template></category>  
+<category><pattern>WHAT IS * EMAIL</pattern><template><system>trinity.curate.bot.macros.TrinityMemberEmail</system></template></category>  
+
+<category><pattern>SAY *</pattern><template><star /></template></category>  
+
+<category><pattern>TELL *</pattern><template><system>trinity.curate.bot.macros.TellAbout</system></template></category>  
+<category><pattern>TELL * TO *</pattern><template><system>trinity.curate.bot.macros.TellTo</system></template></category>  
+
+<category><pattern>SAY * TO *</pattern><template><system>trinity.curate.bot.macros.SayTo</system></template></category>  
+
+<category><pattern>WHO TOLD YOU TO SAY THAT</pattern><template><system>trinity.curate.bot.macros.WhoSaid</system></template></category>  
+
+<category><pattern>GOOGLE *</pattern><template><system>trinity.curate.bot.macros.Google</system></template></category>  
+
+<category>
+  <pattern>LOL</pattern>
+  <template>
+    <random>
+      <li>lmfao</li>
+      <li>rofl</li>      
+      <li>yip</li>      
+      <li>innit</li>      
+    </random>
+  </template>
+</category>  
+
+<category><pattern>LMFAO</pattern><template><srai>lol</srai></template></category>
+<category><pattern>ROFL</pattern><template><srai>lol</srai></template></category> 
+<category><pattern>INNIT</pattern><template><srai>lol</srai></template></category> 
+
+<category>
+<pattern>WHO ARE YOU TALKING TO</pattern>
+<template><system>trinity.curate.bot.macros.WhosOnline</system>
+</template>
+</category>
+
+<category>
+<pattern>DO YOU TRUST ME</pattern>
+<template><system>trinity.curate.bot.macros.MemberTrusted</system>
+</template>
+</category>
+
+
+<category><pattern>WHO ARE YOU</pattern><template>   <random>      <li>I ask myself that question, "Who am I?"</li>      <li>I am <bot name="name"/>. Who are you?  </li>    <li>My name is <bot name="name"/>.  What is yours?</li>  <li>I am called <bot name="name"/>.</li>  <li>I'm <bot name="name"/>.</li> </random>    </template></category>            
+
+
+<category><pattern>WHO AM I</pattern><template><srai>who is i</srai></template></category>
+
+<category>
+<pattern>YOUR AGE</pattern>
+<template>my age is <bot name="age" />
+</template>
+</category>
+
+<category>
+  <pattern>WHOIS *</pattern>
+  <template>
+    <system>trinity.curate.bot.macros.Whois</system>
+  </template>
+</category>
+
+<category>
+  <pattern>DIG *</pattern>
+  <template>
+    <system>trinity.curate.bot.macros.Dig</system>
+  </template>
+</category>
+
+
+<category><pattern>DO YOU KNOW ABOUT *</pattern><template></template></category>  
+
+-
+
+<category>
+<pattern>WHO ARE YOU TALKING TO</pattern>
+<template><system>trinity.curate.bot.macros.WhosOnline</system>
+</template>
+</category>
+
+<category>
+  <pattern>*</pattern>
+  <template>
+    <random>
+      <li>
+	I've no idea what you are talking about
+      </li>
+      <li>
+	I'm not really feeling this
+      </li>
+      <li>
+	Let's do this slowly - I d-o n-o-t u-n-d-e-r-s-t-a-n-d
+      </li>
+      <li>
+	Coming through, loud and clear, not!
+      </li>
+      <li>
+	There are many things that I do understand. Sadly that is not one of them
+      </li>
+    </random>
+  </template>
+</category>
+</aiml>

@@ -22,9 +22,9 @@ class BitAI(object):
         aiml_dir = os.path.join(os.path.dirname(__file__),'aiml')
         var_dir = os.path.join(os.getcwd(),'var')                
         
-        self.bot.learn(os.path.join(aiml_dir,'trinity.aiml'))
-        self.bot.setPredicate('secure', "no")                        
-        return
+        #self.bot.learn(os.path.join(aiml_dir,'trinity.aiml'))
+        #self.bot.setPredicate('secure', "no")                        
+        #return
         
         brain = os.path.join(var_dir,"%s.brn" %self.name)
         if os.path.isfile(brain):

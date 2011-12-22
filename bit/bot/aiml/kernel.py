@@ -35,17 +35,12 @@ class BitKernel(aiml.Kernel):
         try: that = self._subbers['normal'].sub(outputHistory[-1])
         except: that = "" # there might not be any output yet
         topic = self.getPredicate("topic", sessionID)
-
-        stars = []
-        for index in range(1,4):
-            stars.append(self._brain.star("star", input, that, topic, index))
-
-
         if '.' in command and not '/' in command:
             code = resolve(command)
             if code:
-                _code = code(self)                
-                parser = _code.parse(elem,sessionID,*stars)
+                _code = code(self)      
+                parser = _code.parse(elem,sessionID,self)
+                # use maybedeferred here
                 if hasattr(parser,'addCallback'):
                     parser.addCallback(lambda result: _code.complete())
                     return ''
@@ -76,3 +71,20 @@ class BitKernel(aiml.Kernel):
         response = string.join(response.splitlines()).strip()
         return response
     
+    def respond_async(self, sessionID, response):
+        """Return the Kernel's response to the input string."""
+        
+        # prevent other threads from stomping all over us.
+        self._respondLock.acquire()
+
+        self._addSession(sessionID)
+        
+        # add the data from this exchange to the history lists
+        outputHistory = self.getPredicate(self._outputHistory, sessionID)
+        outputHistory.append(response)
+        while len(outputHistory) > self._maxHistorySize:
+            outputHistory.pop(0)
+            self.setPredicate(self._outputHistory, outputHistory, sessionID)
+         
+        # release the lock and return
+        self._respondLock.release()

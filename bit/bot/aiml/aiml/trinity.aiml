@@ -71,12 +71,6 @@
 </template>
 </category>
 
-<category>
-<pattern>DO YOU TRUST ME</pattern>
-<template><system>trinity.curate.bot.macros.MemberTrusted</system>
-</template>
-</category>
-
 
 <category><pattern>WHO ARE YOU</pattern><template>   <random>      <li>I ask myself that question, "Who am I?"</li>      <li>I am <bot name="name"/>. Who are you?  </li>    <li>My name is <bot name="name"/>.  What is yours?</li>  <li>I am called <bot name="name"/>.</li>  <li>I'm <bot name="name"/>.</li> </random>    </template></category>            
 

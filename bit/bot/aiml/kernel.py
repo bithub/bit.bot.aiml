@@ -2,11 +2,17 @@
 
 import os
 import aiml
+import sys
+import string
 
+from zope.event import notify
+from bit.bot.base.events import BotRespondsEvent, PersonSpeaksEvent
+
+from twisted.internet import defer
 
 class BitKernel(aiml.Kernel):
     # <system>
-    def _processSystem(self,elem, sessionID):
+    def _processSystem(self,elem, request):
         """Process a <system> AIML element.
 
         <system> elements process their contents recursively, and then
@@ -22,29 +28,29 @@ class BitKernel(aiml.Kernel):
         # build up the command string
         command = ""
         for e in elem[2:]:
-            command += self._processElement(e, sessionID)
+            command += self._processElement(e, request.session_id)
 
         #HACK
-        
+
+
         from zope.dottedname.resolve import resolve  
 
-        inputStack = self.getPredicate(self._inputStack, sessionID)
+        inputStack = self.getPredicate(self._inputStack, request.session_id)
         input = self._subbers['normal'].sub(inputStack[-1])
         # fetch the Kernel's last response (for 'that' context)
-        outputHistory = self.getPredicate(self._outputHistory, sessionID)
+        outputHistory = self.getPredicate(self._outputHistory, request.session_id)
         try: that = self._subbers['normal'].sub(outputHistory[-1])
         except: that = "" # there might not be any output yet
-        topic = self.getPredicate("topic", sessionID)
+        topic = self.getPredicate("topic", request.session_id)
         if '.' in command and not '/' in command:
             code = resolve(command)
             if code:
                 _code = code(self)      
-                parser = _code.parse(elem,sessionID,self)
-                # use maybedeferred here
-                if hasattr(parser,'addCallback'):
-                    parser.addCallback(lambda result: _code.complete())
-                    return ''
-                return parser
+                def _complete(result):
+                    _code.complete()
+                    return result or ''
+                return defer.maybeDeferred(_code.parse,self,request,elem).addCallback(_complete)
+
         #/HACK
 
 
@@ -70,21 +76,31 @@ class BitKernel(aiml.Kernel):
             response += line + "\n"
         response = string.join(response.splitlines()).strip()
         return response
+
+    def respond(self, request, input):
+        notify(PersonSpeaksEvent(self).update(request,input))
+
+        def _gotResponse(resp):
+            notify(BotRespondsEvent(self).update(request,resp))            
+            return resp
+
+        return aiml.Kernel.respond(self,request,input).addCallback(_gotResponse)
     
     def respond_async(self, sessionID, response):
-        """Return the Kernel's response to the input string."""
-        
+        """Return the Kernel's response to the input string."""        
+        notify(BotRespondsEvent(self).update(sessionID,response))
+
         # prevent other threads from stomping all over us.
         self._respondLock.acquire()
 
-        self._addSession(sessionID)
+        self._addSession(request.session_id)
         
         # add the data from this exchange to the history lists
-        outputHistory = self.getPredicate(self._outputHistory, sessionID)
+        outputHistory = self.getPredicate(self._outputHistory, request.session_id)
         outputHistory.append(response)
         while len(outputHistory) > self._maxHistorySize:
             outputHistory.pop(0)
-            self.setPredicate(self._outputHistory, outputHistory, sessionID)
+            self.setPredicate(self._outputHistory, outputHistory, request.session_id)
          
         # release the lock and return
         self._respondLock.release()

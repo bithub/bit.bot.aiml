@@ -1,7 +1,10 @@
-
-
 import os
+
+from zope.component import queryAdapter
+
 from twisted.internet import defer
+
+from bit.bot.common.interfaces import ICommand
 
 from bit.bot.aiml.kernel import BitKernel
 
@@ -50,6 +53,19 @@ class BitAI(object):
         #self.bot.saveBrain(brain)
         self.bot.setPredicate('secure', "no")                
 
-    def respond(self,question,session=None):
-        return defer.maybeDeferred(self.bot.respond,question,session)
+    def respond(self,request,question,session=None):
+        return defer.maybeDeferred(self.bot.respond,request,question)
         
+    def command(self,request,command,args,session=None):       
+        def run():
+            _command = queryAdapter(request, ICommand, name=command)        
+            if _command:
+                try:
+                    return _command.run(*args)
+                except :
+                    import traceback; traceback.print_exc()
+            print 'NO SUCH COMMAND %s' %command
+        return defer.maybeDeferred(run)
+
+
+

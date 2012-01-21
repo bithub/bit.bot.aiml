@@ -1,18 +1,19 @@
 
-import os
 from zope.interface import implements
 from zope.component import getUtility,getGlobalSiteManager
-from bit.bot.common.interfaces import IPluginFactory, IIntelligent, IConfiguration
+from bit.bot.common.interfaces import IPlugin, IIntelligent, IConfiguration
 
 from bit.bot.aiml.ai import BitAI
 
-from bit.bot.base.plugin import BitBotPluginBase
+from bit.bot.base.plugin import BotPlugin
+from bit.bot.aiml.handlers import bot_speaks
 
-
-class BitBotAIPlugin(BitBotPluginBase):
-    implements(IPluginFactory)
+class BitBotAIPlugin(BotPlugin):
+    implements(IPlugin)
 
     name = 'bit.bot.aiml'
+
+    _handlers = [bot_speaks]
 
     def load_utils(self):
         name = getUtility(IConfiguration).get('bot','name')

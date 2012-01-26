@@ -6,7 +6,7 @@ from twisted.internet import defer
 
 from bit.bot.common.interfaces import ICommand
 
-from bit.bot.aiml.kernel import BitKernel
+from bit.aiml.async.kernel import Kernel
 
 class BitAI(object):
     def __init__(self,name):
@@ -16,7 +16,7 @@ class BitAI(object):
     @property
     def bot(self):
         if self._bot: return self._bot
-        self._bot = BitKernel()
+        self._bot = Kernel()
         return self._bot
 
     def learn(self,filepath):

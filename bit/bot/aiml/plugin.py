@@ -1,7 +1,9 @@
 
 from zope.interface import implements
 from zope.component import getUtility,getGlobalSiteManager
-from bit.bot.common.interfaces import IPlugin, IIntelligent, IConfiguration
+
+from bit.core.interfaces import IPlugin, IConfiguration
+from bit.bot.common.interfaces import  IIntelligent
 
 from bit.bot.aiml.ai import BitAI
 

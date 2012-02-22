@@ -1,14 +1,18 @@
 import os
 
-from zope.component import queryAdapter
+from zope.interface import implements, implementer
+from zope.component import queryAdapter, getUtility
 
 from twisted.internet import defer
 
-from bit.bot.common.interfaces import ICommand
+from bit.core.interfaces import IConfiguration
+
+from bit.bot.common.interfaces import ICommand, IIntelligent
 
 from bit.aiml.async.kernel import Kernel
 
 class BitAI(object):
+    implements(IIntelligent)
     def __init__(self,name):
         self.name = name
         self._bot = None
@@ -68,4 +72,12 @@ class BitAI(object):
         return defer.maybeDeferred(run)
 
 
+
+
+@implementer(IIntelligent)
+def botAI():
+    name = getUtility(IConfiguration).get('bot','name')
+    ai = BitAI(name.capitalize())
+    ai.wake(True)
+    return ai
 

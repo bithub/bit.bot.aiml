@@ -1,0 +1,16 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="bit.bot.aiml">
+  <include package="bit.bot.base" />
+  <adapter
+      factory=".extends.AIMLPlugin"
+      for="bit.core.interfaces.IPlugin"
+      name="aiml"
+      />
+  <utility
+      factory=".ai.botAI"
+      />  
+  <subscriber
+      handler=".handlers.bot_speaks"
+      />
+</configure>

@@ -9,6 +9,7 @@
       />
   <utility
       factory=".ai.botAI"
+      provides="bit.bot.common.interfaces.IIntelligent"
       />  
   <subscriber
       handler=".handlers.bot_speaks"

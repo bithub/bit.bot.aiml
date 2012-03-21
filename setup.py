@@ -23,6 +23,14 @@ setup(name='bit.bot.aiml',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'zope.interface',
+          'zope.component',
+          'zope.i8nmessageid',
+          'twisted',
+          'bit.core',
+          'bit.bot.common',
+          'bit.bot.base',
+          'bit.aiml.async',
       ],
       entry_points="""
       # -*- Entry points: -*-

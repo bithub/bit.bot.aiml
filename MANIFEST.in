@@ -7,6 +7,7 @@ global-include *html
 global-include *tpl
 global-include *css
 global-include *js
+global-include *aiml
 
 global-exclude *pyc
 

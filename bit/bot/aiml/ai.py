@@ -6,8 +6,8 @@ from zope.component import queryAdapter, getUtility
 from twisted.python import log
 from twisted.internet import defer
 
-from bit.core.interfaces import IConfiguration
-from bit.bot.common.interfaces import ICommand, IIntelligent
+from bit.core.interfaces import IConfiguration, ICommand
+from bit.bot.common.interfaces import IIntelligent
 from bit.aiml.async.kernel import Kernel
 
 

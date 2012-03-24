@@ -24,7 +24,7 @@ class BitAI(object):
             return self._bot
         self._bot = Kernel()
         return self._bot
-    
+
     def learn(self, filepath):
         log.err('bit.bot.aiml: BitAI.learn: ', os.path.basename(filepath))
         self.bot.setPredicate('secure', "yes")
@@ -66,6 +66,7 @@ class BitAI(object):
 
     def command(self, request, command, args, session=None):
         log.err('bit.bot.aiml: BitAI.command')
+
         def run():
             _command = queryAdapter(request, ICommand, name=command)
             if _command:

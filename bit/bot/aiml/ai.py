@@ -3,6 +3,7 @@ import os
 from zope.interface import implements, implementer
 from zope.component import queryAdapter, getUtility
 
+from twisted.python import log
 from twisted.internet import defer
 
 from bit.core.interfaces import IConfiguration
@@ -23,15 +24,16 @@ class BitAI(object):
             return self._bot
         self._bot = Kernel()
         return self._bot
-
+    
     def learn(self, filepath):
+        log.err('bit.bot.aiml: BitAI.learn: ', os.path.basename(filepath))
         self.bot.setPredicate('secure', "yes")
         print 'bot learning: %s' % filepath
         self.bot.learn(filepath)
         self.bot.setPredicate('secure', "no")
 
     def wake(self, verbose=False):
-        print 'waking bot'
+        log.err('bit.bot.aiml: BitAI.wake')
         self.bot.verbose(verbose)
         self.bot.setBotPredicate('name', self.name)
         self.bot.setBotPredicate('age', '~180')
@@ -59,9 +61,11 @@ class BitAI(object):
         self.bot.setPredicate('secure', "no")
 
     def respond(self, request, question, session=None):
+        log.err('bit.bot.aiml: BitAI.respond')
         return defer.maybeDeferred(self.bot.respond, request, question)
 
     def command(self, request, command, args, session=None):
+        log.err('bit.bot.aiml: BitAI.command')
         def run():
             _command = queryAdapter(request, ICommand, name=command)
             if _command:

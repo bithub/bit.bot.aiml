@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<aiml>
+<!--  -->
+<!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+<!-- This program is open source code released under -->
+<!-- the terms of the GNU General Public License     -->
+<!-- as published by the Free Software Foundation.   -->
+<!-- Complies with AIML 1.0 Tag Set Specification -->
+<!-- as adopted by the ALICE A.I. Foundation.  -->
+<!--  --> 
+
+<!-- member info -->
+
+
+<category><pattern>WHO ARE YOU</pattern><template>   <random>      <li>I ask myself that question, "Who am I?"</li>      <li>I am <bot name="name"/>. Who are you?  </li>    <li>My name is <bot name="name"/>.  What is yours?</li>  <li>I am called <bot name="name"/>.</li>  <li>I'm <bot name="name"/>.</li> </random>    </template></category>            
+
+<category><pattern>WHAT AM I</pattern><template>   <random>      <li>a teabag</li>      <li> a very naughty boy (or girl) </li>    <li>a carbon unit with limited intelligence</li>   <li>hmmm, i'm not sure but you're starting to get on my nerves</li> </random>    </template></category>            
+
+<category><pattern>WHO IS *</pattern><template><system>bit.bot.aiml.macros.WhoIs</system></template></category>  
+<category><pattern>WHO ARE *</pattern><template><system>bit.bot.aiml.macros.WhoIs</system></template></category>  
+<category><pattern>WHO AM I</pattern><template><srai>who is i</srai></template></category>
+<category><pattern>WHOS *</pattern><template><srai>who is <star index="1" /></srai></template></category> 
+
+<category><pattern>DO YOU KNOW WHO * IS</pattern><template><srai>who is <star index="1" /></srai></template></category> 
+<category><pattern>DO YOU KNOW WHO * ARE</pattern><template><srai>who are <star index="1" /></srai></template></category> 
+<category><pattern>DO YOU KNOW WHO *</pattern><template><srai>who is <star index="1" /></srai></template></category> 
+<category><pattern>DO YOU KNOW WHO I AM</pattern><template><srai>who is i</srai></template></category> 
+
+<category><pattern>WHAT IS *</pattern><template><system>bit.bot.aiml.macros.WhatIs</system></template></category>  
+<category><pattern>WHATS *</pattern><template><srai>what is <star index="1" /></srai></template></category> 
+<category><pattern>DO YOU KNOW WHAT * IS</pattern><template><srai>what is <star index="1" /></srai></template></category> 
+<category><pattern>DO YOU KNOW WHAT *</pattern><template><srai>what is <star index="1" /></srai></template></category> 
+
+
+<category><pattern>WHERE ARE *</pattern><template><system>bit.bot.aiml.macros.WhereIs</system></template></category>  
+<category><pattern>WHERE IS *</pattern><template><system>bit.bot.aiml.macros.WhereIs</system></template></category>  
+<category><pattern>WHERES *</pattern><template><srai>where is <star index="1" /></srai></template></category> 
+<category><pattern>WHERE AM I</pattern><template><srai>where is i</srai></template></category>
+<category><pattern>DO YOU KNOW WHERE * IS</pattern><template><srai>where is <star index="1" /></srai></template></category> 
+<category><pattern>DO YOU KNOW WHERE *</pattern><template><srai>where is <star index="1" /></srai></template></category> 
+
+<category><pattern>DO YOU KNOW *</pattern><template><srai><star index="1" /></srai></template></category> 
+
+<category>
+<pattern>WHATS YOUR AGE</pattern>
+<template>my age is <bot name="age" />
+</template>
+</category>
+
+<category>
+  <pattern>*</pattern>
+  <template>
+    <random>
+      <li>
+	I've no idea what you are talking about
+      </li>
+      <li>
+	I'm not really feeling this
+      </li>
+      <li>
+	Let's do this slowly - I d-o n-o-t u-n-d-e-r-s-t-a-n-d
+      </li>
+      <li>
+	Coming through, loud and clear, not!
+      </li>
+      <li>
+	There are many things that I do understand. Sadly that is not one of them
+      </li>
+    </random>
+  </template>
+</category>
+</aiml>

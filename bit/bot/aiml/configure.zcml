@@ -9,8 +9,81 @@
       provides="bit.bot.common.interfaces.IIntelligent"
       />  
 
+  <utility
+      factory=".query.Who"
+      />
+
+  <adapter
+      factory=".query.WhoProvider"
+      for=".interfaces.IWho
+	   bit.bot.common.interfaces.ISocketRequest"
+      />
+
+  <adapter
+      factory=".query.WhatCharacterProvider"
+      for=".interfaces.IWhat
+	   bit.bot.common.interfaces.ISocketRequest"
+      name="characters"
+      />
+
+  <adapter
+      factory=".query.WhatArithmeticProvider"
+      for=".interfaces.IWhat
+	   bit.bot.common.interfaces.ISocketRequest"
+      name="arithmetic"
+      />
+
+  <adapter
+      factory=".query.WhatInfoProvider"
+      for=".interfaces.IWhat
+	   bit.bot.common.interfaces.ISocketRequest"
+      name="info"
+      />
+
+  <adapter
+      factory=".query.WhatTemporalProvider"
+      for=".interfaces.IWhat
+	   bit.bot.common.interfaces.ISocketRequest"
+      name="datetime"
+      />
+
+
+  <adapter
+      factory=".query.WhereProvider"
+      for=".interfaces.IWhere
+	   bit.bot.common.interfaces.ISocketRequest"
+      name="where"
+      />
+
+
+  <utility
+      factory=".query.Where"
+      />
+
+  <utility
+      factory=".query.What"
+      />
+
   <subscriber
       handler=".handlers.bot_speaks"
+      />
+
+  <adapter
+      factory=".macros.WhoIs"
+      for="bit.bot.common.interfaces.ISocketRequest"
+      name="bit.bot.aiml.macros.WhoIs"
+      />
+
+  <adapter
+      factory=".macros.WhatIs"
+      for="bit.bot.common.interfaces.ISocketRequest"
+      name="bit.bot.aiml.macros.WhatIs"
+      />
+
+  <adapter
+      factory=".macros.WhereIs"
+      for="bit.bot.common.interfaces.ISocketRequest"
+      name="bit.bot.aiml.macros.WhereIs"
       />
 
 </configure>

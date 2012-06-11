@@ -47,14 +47,12 @@
       name="datetime"
       />
 
-
   <adapter
       factory=".query.WhereProvider"
       for=".interfaces.IWhere
 	   bit.bot.common.interfaces.ISocketRequest"
       name="where"
       />
-
 
   <utility
       factory=".query.Where"
@@ -70,19 +68,22 @@
 
   <adapter
       factory=".macros.WhoIs"
-      for="bit.bot.common.interfaces.ISocketRequest"
+      for="bit.aiml.async.interfaces.IAIMLKernel
+	   bit.bot.common.interfaces.ISocketRequest"
       name="bit.bot.aiml.macros.WhoIs"
       />
 
   <adapter
       factory=".macros.WhatIs"
-      for="bit.bot.common.interfaces.ISocketRequest"
+      for="bit.aiml.async.interfaces.IAIMLKernel
+	   bit.bot.common.interfaces.ISocketRequest"
       name="bit.bot.aiml.macros.WhatIs"
       />
 
   <adapter
       factory=".macros.WhereIs"
-      for="bit.bot.common.interfaces.ISocketRequest"
+      for="bit.aiml.async.interfaces.IAIMLKernel
+	   bit.bot.common.interfaces.ISocketRequest"
       name="bit.bot.aiml.macros.WhereIs"
       />
 
